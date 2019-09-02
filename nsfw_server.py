@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+# Use Python 3
+# Install dependencies:     pip install tensorflow flask
+# Run server:               python nsfw_server.py
+# Open in browser:          http://localhost:8082/classify?image_path=/home/user/image.jpg
+
 import sys
 import argparse
 import tensorflow as tf
@@ -9,9 +14,9 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/classify', methods=['POST'])
+@app.route('/classify', methods=['GET'])
 def classify():
-    filename = request.form["image_path"]
+    filename = request.args["image_path"]
     image = create_yahoo_image_loader()(filename)
     predictions = sess.run(model.predictions, feed_dict={model.input: image})
     # print("\tSFW score:\t{}\n\tNSFW score:\t{}".format(*predictions[0]))
