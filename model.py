@@ -31,7 +31,7 @@ class OpenNsfwModel:
         self.input_tensor = None
 
         if input_type == InputType.TENSOR:
-            self.input = tf.placeholder(tf.float32,
+            self.input = tf.compat.v1.placeholder(tf.float32,
                                         shape=[None, 224, 224, 3],
                                         name="input")
             self.input_tensor = self.input
